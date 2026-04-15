@@ -5,7 +5,7 @@ import com.microsoft.playwright.Page;
 import com.yourcompany.shipping.pages.shipping.ShippingSettingsPage;
 import com.yourcompany.shipping.pages.shipping.ShippingProfilesPage;
 import com.yourcompany.shipping.pages.shipping.UspsSettingsPage;
-import com.yourcompany.shipping.utils.PlaywrightFactory;
+import org.google.utils.PlaywrightFactory;
 import io.cucumber.java.Scenario;
 
 /**

@@ -8,33 +8,31 @@ Feature: Shipping Settings
     Given I am logged in as an admin
     And I navigate to the Shipping Settings page
 
-  @flat-rate @regression
-  Scenario: Flat rate shipping saves and displays correctly for USA
-    When I enable shipping for country "United States"
-    And I set the shipping method to "Flat Rate"
-    And I enter a flat rate of "5.99"
+  @regression
+  Scenario: I can select Target Countries and I my Shipping Settings Save
+    When I select the Target country "United States"
+    And I click Continue
+    And I click Save on my Delivery Times
     And I save the shipping settings
     Then a success message is displayed
-    And the flat rate "5.99" is displayed for "United States"
+    And United States is displayed as a Shipping Country
 
-  @by-quantity @regression
-  Scenario: Shipping by quantity saves and displays correctly
-    When I enable shipping for country "United States"
-    And I set the shipping method to "By Quantity"
-    And I enter a rate of "2.00" for quantity "1"
-    And I enter a rate of "1.50" for quantity "2"
-    And I save the shipping settings
+  @regression
+  Scenario: I can add a Country to Rest of World
+    When I select the Target country "France"
+    And I click continue
+    And I click Save on my Delivery Times
     Then a success message is displayed
-    And the quantity rates are displayed correctly
+    And France is shown in my Rest of World profile
 
-  @toggle @regression
-  Scenario: Shipping can be enabled and disabled
-    When I disable shipping globally
+  @regression
+  Scenario: I can disable a shipping Country
+    When I select multiple Target Countries
+    And I click continue
+    And I click Save on my Delivery Times
+    Then I can diable all shipping countries except the default
     And I save the shipping settings
-    Then shipping is shown as disabled
-    When I enable shipping globally
-    And I save the shipping settings
-    Then shipping is shown as enabled
+    Then only the deafult country is enabled
 
   @countries @regression
   Scenario Outline: Shipping settings can be configured for multiple target countries

@@ -1,6 +1,6 @@
 package hooks;
 
-import com.yourcompany.shipping.world.ShippingWorld;
+import world.ShippingWorld;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
