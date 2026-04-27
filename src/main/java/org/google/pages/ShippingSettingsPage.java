@@ -2,16 +2,8 @@ package org.google.pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import org.google.pages.BasePage;
+import org.google.shipping.config.ConfigManager;
 
-/**
- * Global Shipping Settings Page
- * Covers: enable/disable shipping, shipping methods (flat rate, by quantity),
- * rate configuration and saving settings.
- *
- * NOTE: CSS selectors are best-assumption placeholders.
- * Replace with actual selectors from your app's DOM.
- */
 public class ShippingSettingsPage extends BasePage {
 
     // ── URL ────────────────────────────────────────────────────
@@ -145,5 +137,10 @@ public class ShippingSettingsPage extends BasePage {
 
     public String getValidationErrorText() {
         return getText(validationError);
+    }
+
+    public void open() {
+        navigateTo(ConfigManager.get("base.url") + "/channel/google/settings/shipping");
+        waitForPageLoad();
     }
 }

@@ -1,36 +1,34 @@
 package world;
 
-
 import com.microsoft.playwright.Page;
-import com.yourcompany.shipping.pages.shipping.ShippingSettingsPage;
-import com.yourcompany.shipping.pages.shipping.ShippingProfilesPage;
-import com.yourcompany.shipping.pages.shipping.UspsSettingsPage;
+import org.google.pages.LoginPage;
+import org.google.pages.ShippingSettingsPage;
+import org.google.pages.CountrySettingsPage;
 import org.google.utils.PlaywrightFactory;
 import io.cucumber.java.Scenario;
 
-/**
- * Cucumber World — shared state across step definitions per scenario.
- * Inject this into any step class via constructor injection.
- */
 public class ShippingWorld {
 
     private final PlaywrightFactory factory = new PlaywrightFactory();
     private Page page;
 
-    // Pages — lazily initialised after browser is up
     private ShippingSettingsPage shippingSettingsPage;
-    private ShippingProfilesPage shippingProfilesPage;
-    private UspsSettingsPage uspsSettingsPage;
-
-    // ── Lifecycle ──────────────────────────────────────────────
+    private LoginPage loginPage;
+    private CountrySettingsPage countrySettingsPage;
 
     public void init() {
         factory.initBrowser();
         page = factory.getPage();
     }
+    public LoginPage loginPage() {
+        if (loginPage == null) {
+            loginPage = new LoginPage(page, factory.getContext());
+        }
+        return loginPage;
+    }
+
 
     public void tearDown(Scenario scenario) {
-        // Capture screenshot on failure
         if (scenario.isFailed()) {
             byte[] screenshot = page.screenshot(
                     new Page.ScreenshotOptions().setFullPage(true)
@@ -39,8 +37,6 @@ public class ShippingWorld {
         }
         factory.tearDown();
     }
-
-    // ── Page Accessors ─────────────────────────────────────────
 
     public Page getPage() {
         return page;
@@ -52,18 +48,10 @@ public class ShippingWorld {
         }
         return shippingSettingsPage;
     }
-
-    public ShippingProfilesPage shippingProfilesPage() {
-        if (shippingProfilesPage == null) {
-            shippingProfilesPage = new ShippingProfilesPage(page);
+    public CountrySettingsPage countrySettingsPage() {
+        if (countrySettingsPage == null) {
+            countrySettingsPage = new CountrySettingsPage(page);
         }
-        return shippingProfilesPage;
-    }
-
-    public UspsSettingsPage uspsSettingsPage() {
-        if (uspsSettingsPage == null) {
-            uspsSettingsPage = new UspsSettingsPage(page);
-        }
-        return uspsSettingsPage;
+        return countrySettingsPage;
     }
 }

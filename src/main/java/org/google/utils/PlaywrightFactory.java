@@ -37,6 +37,10 @@ public class PlaywrightFactory {
         return page;
     }
 
+    public BrowserContext getContext() {
+        return context;
+    }
+
     public void tearDown() {
         if (page != null)     page.close();
         if (context != null)  context.close();

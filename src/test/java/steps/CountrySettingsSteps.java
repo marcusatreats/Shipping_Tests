@@ -1,5 +1,6 @@
 package steps;
 
+import io.cucumber.java.PendingException;
 import org.google.shipping.config.ConfigManager;
 import world.ShippingWorld;
 import io.cucumber.java.en.*;
@@ -130,4 +131,16 @@ public class CountrySettingsSteps {
         assertTrue(world.countrySettingsPage().isSuccessMessageDisplayed(),
                 "Expected a success message after saving country settings");
     }
+
+    @When("I select the Target country {string}")
+    public void iSelectTheTargetCountry(String arg0) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+      @Given("I am logged in as an admin")
+      public void iAmLoggedInAsAnAdmin() {
+            // Write code here that turns the phrase above into concrete actions
+            throw new PendingException();
+      }
 }
