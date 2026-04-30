@@ -1,8 +1,12 @@
 package steps;
 
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.Cookie;
+import com.microsoft.playwright.options.LoadState;
 import io.cucumber.java.PendingException;
 import org.google.shipping.config.ConfigManager;
 import world.ShippingWorld;
+import com.microsoft.playwright.*;
 import io.cucumber.java.en.*;
 
 import java.util.List;
@@ -13,6 +17,7 @@ public class CountrySettingsSteps {
 
     private final ShippingWorld world;
     private final String baseUrl = ConfigManager.get("base.url");
+    public static String url = "https://users.wix.com/signin??";
 
     public CountrySettingsSteps(ShippingWorld world) {
         this.world = world;
@@ -134,13 +139,12 @@ public class CountrySettingsSteps {
 
     @When("I select the Target country {string}")
     public void iSelectTheTargetCountry(String arg0) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+            world.loginPage().navigateTo(ConfigManager.get("shipping.url"));
     }
 
-      @Given("I am logged in as an admin")
-      public void iAmLoggedInAsAnAdmin() {
-            // Write code here that turns the phrase above into concrete actions
-            throw new PendingException();
-      }
+    @Given("I am logged in as an admin")
+    public void iAmLoggedInAsAnAdmin() {
+        world.loginPage().loginViaSessionCookie();
+    }
+
 }
