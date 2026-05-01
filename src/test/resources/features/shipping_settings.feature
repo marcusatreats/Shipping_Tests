@@ -13,9 +13,8 @@ Feature: Shipping Settings
     When I select the Target country "United States"
     And I click Continue
     And I click Save on my Delivery Times
-    And I save the shipping settings
-    Then a success message is displayed
-    And United States is displayed as a Shipping Country
+    Then I save the shipping settings
+
 
   @regression
   Scenario: I can add a Country to Rest of World

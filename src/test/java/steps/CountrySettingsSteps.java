@@ -1,6 +1,7 @@
 package steps;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.Cookie;
 import com.microsoft.playwright.options.LoadState;
 import io.cucumber.java.PendingException;
@@ -139,7 +140,10 @@ public class CountrySettingsSteps {
 
     @When("I select the Target country {string}")
     public void iSelectTheTargetCountry(String arg0) {
-            world.loginPage().navigateTo(ConfigManager.get("shipping.url"));
+        world.loginPage().navigateTo(ConfigManager.get("shipping.url"));
+        world.getPage().getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Select Target Countries")).click();
+
+
     }
 
     @Given("I am logged in as an admin")
@@ -147,4 +151,18 @@ public class CountrySettingsSteps {
         world.loginPage().loginViaSessionCookie();
     }
 
+    @And("I click Continue")
+    public void iClickContinue() {
+        world.getPage().locator("[data-hook='baseModalLayout-primary-button']").click();
+    }
+
+    @And("I click Save on my Delivery Times")
+    public void iClickSaveOnMyDeliveryTimes() {
+        world.getPage().locator("[data-hook='baseModalLayout-primary-button']").click();
+    }
+
+    @And("I save the shipping settings")
+    public void iSaveTheShippingSettings() {
+        world.getPage().locator("[data-hook='breadcrumbs-item']").getByText("Google Merchant Solutions").click();
+    }
 }
